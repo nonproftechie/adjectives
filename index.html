@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Adjectives demo</title>
+    <style>
+        body {
+            padding: 16px;
+            background-color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #ddd;
+            font-size: 20vh;
+            font-family: sans-serif;
+            font-weight: 300;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="adjectives" :style="headerStyle">{{ adjective }}</h1>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        var app = new Vue({
+            el: 'h1',
+            data: {
+                adjective: '',
+                adjectives: [
+                    'Observant', 'Assured', 'Unruffled', 'Logical',
+                    'Subtle', 'Adventurous', 'Self-made', 'Jovial',
+                    'Dependable', 'Gritty', 'Fearless', 'Punctual',
+                    'Ambitious', 'Courageous', 'Optimistic'
+                ],
+                timesIterated: 0,
+                opacity: 0
+            },
+            computed: {
+                headerStyle: function() {
+                    return {'opacity': this.opacity};
+                }
+            },
+            mounted: function() {
+                this.pickRandomAdjective();
+            },
+            methods: {
+                pickRandomAdjective: function() {
+                    if (this.timesIterated < 9) {
+                        this.timesIterated++;
+                        var elementPicked = Math.floor(Math.random() * this.adjectives.length);
+                        this.adjective = this.adjectives[elementPicked];
+                        this.adjectives.splice(elementPicked, 1);
+                        if (this.opacity == 0) { this.opacity = 1; }
+                        setTimeout(this.pickRandomAdjective, 100 + (100 * this.timesIterated));
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
