@@ -46,7 +46,7 @@
             },
             methods: {
                 pickRandomAdjective: function() {
-                    if (this.timesIterated < 9) {
+                    if (this.timesIterated < 8) {
                         this.timesIterated++;
                         var elementPicked = Math.floor(Math.random() * this.adjectives.length);
                         this.adjective = this.adjectives[elementPicked];
